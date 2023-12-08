@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: http-vs
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - my-http-gw
+  http:
+    - name: "v1-route"
+      match:
+      - uri:
+          prefix: "/version02"        # If user calls /version02
+      rewrite:
+        uri: "/"                      # Redirect to the / 
+      route:
+      - destination:
+          host: httpd                 # httpd service
+          subset: v2                  # Matches the 'v2' subset in DestinationRule
+    - name: "v2-route"
+      route:
+      - destination:
+          host: httpd
+          subset: v1                  # Intended to match the 'v1' subset in DestinationRule

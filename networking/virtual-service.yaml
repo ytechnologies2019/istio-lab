@@ -1,18 +1,18 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: my-http-vs
+  name: http-vs
 spec:
   hosts:
-    - "*"  # Replace this with the actual host if applicable
+  - "*"
   gateways:
-    - my-http-gw
+  - my-http-gw
   http:
-    - match:
-        - uri:
-            prefix: "/" # Change this to match the URL path if needed
-      route:
-        - destination:
-            host: httpd # Service name to route traffic to
-            port:
-              number: 80 # Port number of the service
+  - match:
+    - uri:
+        exact: /
+    route:
+    - destination:
+        host: httpd
+        port:
+          number: 80

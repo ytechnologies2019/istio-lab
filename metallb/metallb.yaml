@@ -1,0 +1,29 @@
+#Before install Follow the steps
+#kubectl edit configmap -n kube-system kube-proxy
+#apiVersion: kubeproxy.config.k8s.io/v1alpha1
+# kind: KubeProxyConfiguration
+# mode: "ipvs"
+# ipvs:
+#   strictARP: true
+
+#install Metallb , apply the Manifest
+#kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.12/config/manifests/metallb-native.yaml
+
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  creationTimestamp: null
+  name: metallb-system
+spec: {}
+status: {}
+---
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: metallb-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 10.4.0.4-10.4.0.100
+---

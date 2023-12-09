@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: my-httpd-gateway
+spec:
+  selector:
+    istio: ingressgateway # Use the appropriate selector if different
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "httpd-master.eastus2.cloudapp.azure.com"

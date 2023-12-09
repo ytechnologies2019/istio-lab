@@ -16,3 +16,11 @@ spec:
         host: httpd
         port:
           number: 80
+  - match:
+    - uri:
+        exact: /portal.html
+    route:
+    - destination:
+        host: nginx
+        port:
+          number: 80

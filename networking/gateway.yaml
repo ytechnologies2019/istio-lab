@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: my-http-gw
+  name: web-gw
 spec:
   selector:
     app: istio-ingressgateway
@@ -11,5 +11,4 @@ spec:
         name: httpd-http
         protocol: HTTP
       hosts:
-        - "*"
-
+        - httpd-master.eastus2.cloudapp.azure.com
